@@ -7,7 +7,7 @@
 #       exp: 'prog' will match content/genre/prog-metal.md and content/genre/prog-rock/* and content/recommentations/greatest-prog-albums.md and more
 #   string - expression to match. requires dir first
 
-if [[ $# -eq 1 ]]
+if [[ $# -ge 1 ]]
 then
     dir="*/$1*"
 else
