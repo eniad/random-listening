@@ -14,7 +14,7 @@ Markdown is a popular text document format. It's human readable and many sites t
 
 ## Lists
 
-Lists can be kept for any logical category. Typical lists would be by artist or genre. Several example lists are included, [./artist/beatles](./artist/beatles.md) and [./genre/rock](./genre/rock.md)
+Lists can be kept for any logical category. Typical lists would be by artist or genre. Several example lists are included, [./artist/beatles](./artist/beatles) and [./genre/rock](./genre/rock)
 
 ## Examples
 

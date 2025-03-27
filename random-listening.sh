@@ -7,23 +7,32 @@
 #       exp: 'prog' will match content/genre/prog-metal.md and content/genre/prog-rock/* and content/recommentations/greatest-prog-albums.md and more
 #   string - expression to match. requires dir first
 
-if [[ $# -ge 1 ]]
-then
-    dir="*/$1*"
-else
-    dir='.'
-fi
+# Directories to exclude
+excludes=("instruments" "random-listening")
 
-if [[ $# -eq 2 ]]
-then
-    string=$2
-else
-    string='\[[ |-]\]'
-fi
+# Build the exclude options for grep
+exclude_opts=()
+for exclude in "${excludes[@]}"; do
+    exclude_opts+=(--exclude-dir="$exclude")
+done
 
-readarray -t array < <(grep -irn "$string" $dir)
+# Set the directory to search
+dir="${1:-.}"
+dir="*/*/$dir*"
 
+# Set the string to search for
+string="${2:-\[[ |-]\]}"
+
+# Perform the search and read results into an array
+readarray -t array < <(grep -siRn "$string" "${exclude_opts[@]}" $dir)
+
+# Check if the array is empty
 size=${#array[@]}
-index=$(($RANDOM % $size))
+if [[ $size -eq 0 ]]; then
+    echo "No matches found."
+    exit 1
+fi
 
-echo $dir ${array[$index]}
+# Select a random match and print it
+index=$((RANDOM % size))
+echo "$dir ${array[$index]}"
