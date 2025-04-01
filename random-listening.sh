@@ -17,14 +17,15 @@ for exclude in "${excludes[@]}"; do
 done
 
 # Set the directory to search
-dir="${1:-.}"
-dir="*/*/$dir*"
+dir="${1:+*/*/*$1*}"
+dir="${dir:-.}"
 
 # Set the string to search for
 string="${2:-\[[ |-]\]}"
 
 # Perform the search and read results into an array
-readarray -t array < <(grep -siRn "$string" "${exclude_opts[@]}" $dir)
+echo  "Searching in $dir for '$string'..."
+readarray -t array < <(grep -sirn "$string" "${exclude_opts[@]}" $dir)
 
 # Check if the array is empty
 size=${#array[@]}
