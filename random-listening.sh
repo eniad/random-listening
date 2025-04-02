@@ -4,7 +4,7 @@
 #   ./random-listening.sh [dir] [string]
 # options:
 #   dir - searches files or directories, two levels deep, that match the input
-#       exp: 'prog' will match content/genre/prog-metal.md and content/genre/prog-rock/* and content/recommentations/greatest-prog-albums.md and more
+#       exp: 'prog' will match content/genre/prog-metal.md and content/genre/prog-rock/* and content/recommendation/greatest-prog-albums.md and more
 #   string - expression to match. requires dir first
 
 # Directories to exclude
@@ -24,7 +24,6 @@ dir="${dir:-.}"
 string="${2:-\[[ |-]\]}"
 
 # Perform the search and read results into an array
-echo  "Searching in $dir for '$string'..."
 readarray -t array < <(grep -sirn "$string" "${exclude_opts[@]}" $dir)
 
 # Check if the array is empty
