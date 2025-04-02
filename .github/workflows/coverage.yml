@@ -22,9 +22,12 @@ jobs:
       - name: Install Bashcov and SimpleCov-Lcov
         run: |
           gem install bashcov
-          gem install simplecov
-          gem install simplecov-cobertura
           gem install simplecov-lcov
+
+      - name: Make Scripts Executable
+        run: |
+          chmod +x ./random-listening.sh
+          chmod +x ./test.sh
 
       - name: Run Tests with Coverage
         run: |
@@ -33,7 +36,7 @@ jobs:
       - name: Convert Coverage to LCOV
         run: |
           mkdir -p coverage/lcov
-          ruby -rjson -e 'require "json"; require "simplecov-lcov"; SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true; File.write("coverage/lcov/coverage.lcov", SimpleCov::Formatter::LcovFormatter.new.format(JSON.parse(File.read("coverage/.resultset.json"))))'
+          ruby -rjson -e 'require "json"; require "simplecov"; require "simplecov-lcov"; SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true; File.write("coverage/lcov/coverage.lcov", SimpleCov::Formatter::LcovFormatter.new.format(JSON.parse(File.read("coverage/.resultset.json"))))'
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v3
