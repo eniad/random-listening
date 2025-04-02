@@ -22,6 +22,8 @@ jobs:
       - name: Install Bashcov and SimpleCov-Lcov
         run: |
           gem install bashcov
+          gem install simplecov
+          gem install simplecov-cobertura
           gem install simplecov-lcov
 
       - name: Run Tests with Coverage
