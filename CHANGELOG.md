@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 1.1.1 - 2025-04-01
 
+- Add testing and code coverage
 - Add LICENSE and CHANGELOG
 - Improve speed, clean up comments
 

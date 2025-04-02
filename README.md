@@ -1,5 +1,7 @@
 # Random Listening
 
+![Codecov](https://codecov.io/gh/eniad/random-listening/branch/main/graph/badge.svg)
+
 This script returns a random album from one or more lists of albums for future listening.
 
 ## Script
