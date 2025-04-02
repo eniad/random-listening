@@ -19,18 +19,24 @@ jobs:
         with:
           ruby-version: '3.0'
 
-      - name: Install Bashcov
+      - name: Install Bashcov and SimpleCov-Lcov
         run: |
           gem install bashcov
+          gem install simplecov-lcov
 
       - name: Run Tests with Coverage
         run: |
           bashcov ./test.sh
 
+      - name: Convert Coverage to LCOV
+        run: |
+          mkdir -p coverage/lcov
+          ruby -rjson -e 'require "json"; require "simplecov-lcov"; SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true; File.write("coverage/lcov/coverage.lcov", SimpleCov::Formatter::LcovFormatter.new.format(JSON.parse(File.read("coverage/.resultset.json"))))'
+
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/.resultset.json
+          files: ./coverage/lcov/coverage.lcov
           flags: unittests
           name: bash-coverage
