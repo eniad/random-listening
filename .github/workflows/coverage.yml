@@ -34,7 +34,7 @@ jobs:
 
       - name: Run Tests with kcov
         run: |
-          mkdir -p coverage && kcov --cobertura-only coverage ./test.sh
+          mkdir -p coverage && kcov --cobertura-only --exclude-path=.github/ coverage ./test.sh
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v2
